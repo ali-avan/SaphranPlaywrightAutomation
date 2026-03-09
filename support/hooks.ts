@@ -34,10 +34,13 @@ BeforeAll(async function () {
     //await page.fill('#password', env.password!);
     await page.fill('#Password', env.password!);
     //await page.click('#login-button');
-    await page.click('button');
+    await Promise.all([
+      page.waitForLoadState('load'),
+      page.click('button'),
+    ]);
+    await page.waitForLoadState('networkidle');
 
 
-    await page.waitForTimeout(5000);
     // Save session
     await saveAuthSession(page);
     console.log('Login done & session saved ✅');
