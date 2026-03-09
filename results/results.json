@@ -1,0 +1,64 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "add-part-functionality;verify-user-is-able-to-logged-in",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "Verify user is able to logged in",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 677300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "User is to be redirected to the homepage screen",
+            "match": {
+              "location": "step-definitions\\HomePageSteps.ts:4"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5021979699,
+              "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'HomePPage' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"to.be.visible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'HomePPage' })\u001b[22m\n\n    at Proxy.<anonymous> (C:\\Users\\Ali Awan\\OneDrive\\Desktop\\SaphranPlaywrightAutomation\\node_modules\\playwright\\lib\\matchers\\expect.js:213:24)\n    at HomePage.verifyHomePageLoaded (C:\\Users\\Ali Awan\\OneDrive\\Desktop\\SaphranPlaywrightAutomation\\pages\\HomePage.ts:12:42)\n    at World.<anonymous> (C:\\Users\\Ali Awan\\OneDrive\\Desktop\\SaphranPlaywrightAutomation\\step-definitions\\HomePageSteps.ts:7:18)"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 1
+          },
+          {
+            "name": "@HomePage",
+            "line": 4
+          },
+          {
+            "name": "@smoke",
+            "line": 4
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "add-part-functionality",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Add Part Functionality",
+    "tags": [
+      {
+        "name": "@Regression",
+        "line": 1
+      }
+    ],
+    "uri": "features\\HomePage.feature"
+  }
+]

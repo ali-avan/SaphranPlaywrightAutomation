@@ -1,0 +1,31 @@
+{
+  "name": "playwright-bdd-ts",
+  "version": "1.0.0",
+  "scripts": {
+    "bdd": "cucumber-js --require-module ts-node/register --require tsconfig-paths/register --require step-definitions/**/*.ts features/**/*.feature --format progress --format json:results/results.json & node report.js",
+
+    "bdd:headless": "HEADLESS=true cucumber-js --require-module ts-node/register --require tsconfig-paths/register --require step-definitions/**/*.ts features/**/*.feature --format json:results/results.json & node report.js",
+
+    "bdd:smoke": "cucumber-js --require-module ts-node/register --require tsconfig-paths/register --require step-definitions/**/*.ts --tags @smoke features/**/*.feature --format json:results/results.json & node report.js",
+
+    "bdd:sanity": "cucumber-js --require-module ts-node/register --require tsconfig-paths/register --require step-definitions/**/*.ts --tags @sanity features/**/*.feature --format json:results/results.json & node report.js",
+
+    "bdd:report": "node report.js",
+    "mcp:execute": "ts-node utils/mcp-orchestrator.ts"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.9.0",
+    "@playwright/mcp": "^0.0.64",
+    "@playwright/test": "^1.39.0",
+    "allure-cucumberjs": "^3.4.5",
+    "allure-playwright": "^2.0.0",
+    "cucumber-html-reporter": "^7.2.0",
+    "open": "^11.0.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}
