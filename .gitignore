@@ -1,1 +1,4 @@
 node_modules
+cucumber-report.html
+tsconfig.json
+results.json
