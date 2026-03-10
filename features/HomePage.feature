@@ -1,8 +1,8 @@
 @Regression
-Feature: Add Part Functionality
+Feature: All the testcases related to the homepage
 
-   @HomePage @smoke
-    Scenario: Verify user is able to logged in 
+   @Login @smoke
+    Scenario: Verify user is able to logged in successfully
     Given User is to be redirected to the homepage screen
 
 

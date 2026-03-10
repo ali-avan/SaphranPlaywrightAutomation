@@ -9,6 +9,7 @@ export class HomePage {
 
   // Function to verify homepage loaded
   async verifyHomePageLoaded() {
+    await this.homePageHeading().waitFor({ state: 'visible', timeout: 10000 });
     await expect(this.homePageHeading()).toBeVisible();
   }
 }
