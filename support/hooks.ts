@@ -1,4 +1,11 @@
-import { AfterAll, Before, BeforeAll, setDefaultTimeout } from '@cucumber/cucumber';
+import {
+  AfterAll,
+  AfterStep,
+  Before,
+  BeforeAll,
+  Status,
+  setDefaultTimeout
+} from '@cucumber/cucumber';
 import { chromium, Browser, BrowserContext, Page } from 'playwright';
 import fs from 'fs';
 import path from 'path';
@@ -44,6 +51,19 @@ BeforeAll(async function () {
 // Reuse the same page for all scenarios
 Before(async function () {
   (this as any).page = page;
+});
+
+AfterStep(async function ({ result }) {
+  if (result?.status !== Status.FAILED || !page) {
+    return;
+  }
+
+  const screenshot = await page.screenshot({
+    fullPage: true,
+    type: 'png'
+  });
+
+  await this.attach(screenshot, 'image/png');
 });
 
 // Close browser after all scenarios

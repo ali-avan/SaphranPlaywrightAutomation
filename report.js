@@ -6,7 +6,7 @@ const reportFile = path.join(__dirname, 'cucumber-report.html');
 
 const options = {
     theme: 'bootstrap',
-    jsonFile: 'allure-results/results.json',  // your JSON results
+    jsonFile: 'results/results.json',
     output: reportFile,
     reportSuiteAsScenarios: true,
     launchReport: false,
