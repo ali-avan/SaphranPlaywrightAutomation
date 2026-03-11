@@ -64,12 +64,3 @@ Then('User navigates to the Login page', async function () {
   loginPage = new LoginPage(this.page);
   await userAdminPage.NavigatesToLogin();
 });
-
-
-Then('Login with the disabled user', async function () {
-  await loginPage.login(userAdminData.userName, userAdminData.password);
-});
-
-Then('Verify user should not be able to login', async function () {
-  await loginPage.verifyDisabledUserCannotLogin();
-});
