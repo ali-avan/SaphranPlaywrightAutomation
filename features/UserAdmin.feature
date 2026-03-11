@@ -1,7 +1,7 @@
 @Regression
 Feature: User Administration
 
-  @UserAdmin @smoke
+  @DisabledUser @smoke
   Scenario: Verify user can open New User form and fill mandatory details
     Given User is to be redirected to the homepage screen
     And User navigates to the User Administration page
@@ -15,3 +15,6 @@ Feature: User Administration
     And User clicks on the edit icon under actions column
     Then User sets the status as disabled on Edit user details page
     And User clicks on save all button
+    And User navigates to the Login page
+    Then Login with the disabled user
+    And Verify user should not be able to login

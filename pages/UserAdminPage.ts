@@ -1,5 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { env, waitForPageLoad } from '../utils/helper';
+import { LoginPage } from './LoginPage';
 
 export type UserAdminData = {
   firstName: string;
@@ -130,5 +131,10 @@ export class UserAdminPage {
     await this.saveAlBtn().waitFor({ state: 'visible', timeout: 10000 });
     await this.saveAlBtn().click();
      await this.page.waitForTimeout(5000);
+  }
+
+  async NavigatesToLogin() {
+    const loginPage = new LoginPage(this.page);
+    await loginPage.LaunchUrl();
   }
 }

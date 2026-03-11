@@ -1,9 +1,11 @@
 import { Given, Then, When } from '@cucumber/cucumber';
 import fs from 'fs';
 import path from 'path';
+import { LoginPage } from '../pages/LoginPage';
 import { UserAdminData, UserAdminPage } from '../pages/UserAdminPage';
 
 let userAdminPage: UserAdminPage;
+let loginPage: LoginPage;
 
 const userAdminData = JSON.parse(
   fs.readFileSync(
@@ -56,4 +58,18 @@ Then('User sets the status as disabled on Edit user details page', async functio
 
 Then('User clicks on save all button', async function () {
   await userAdminPage.clickSaveAllButon();
+});
+
+Then('User navigates to the Login page', async function () {
+  loginPage = new LoginPage(this.page);
+  await userAdminPage.NavigatesToLogin();
+});
+
+
+Then('Login with the disabled user', async function () {
+  await loginPage.login(userAdminData.userName, userAdminData.password);
+});
+
+Then('Verify user should not be able to login', async function () {
+  await loginPage.verifyDisabledUserCannotLogin();
 });
