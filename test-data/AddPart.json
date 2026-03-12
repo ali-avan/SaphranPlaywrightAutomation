@@ -1,0 +1,15 @@
+{
+  "projectNameNumber": "Mazda Brake System Upgrade",
+  "partName": "Front Brake Caliper",
+  "internalPartNumber": "INT-BC-1045",
+  "reasonForChange": "New Part",
+  "accountManager": "John Anderson",
+  "businessStatus": "Forecast Tracking",
+  "originatingPartNumber": "ORG-BC-998",
+  "customer": "Mazda",
+  "partProductionType": "Mass Production",
+  "customerPartNumber": "MZD-BC-44521",
+  "drawingNumber": "DRW-784512",
+  "drawingVersion": "V1.2",
+  "internalQuoteId": "QT-2026-001"
+}
