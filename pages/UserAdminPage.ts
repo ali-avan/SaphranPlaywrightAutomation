@@ -1,5 +1,5 @@
 import { Page, expect } from '@playwright/test';
-import { env, waitForPageLoad } from '../utils/helper';
+import { env, waitForElement, waitForPageLoad } from '../utils/helper';
 import { LoginPage } from './LoginPage';
 
 export type UserAdminData = {
@@ -36,6 +36,10 @@ export class UserAdminPage {
   successToastMessage = () => this.page.locator('div.toastr-message');
   userSearchInput = () => this.page.getByRole('textbox', { name: 'Search' });
   userAdminPage = () =>  this.page.getByRole('link', { name: /User Administration/i })
+  userRow = (userName: string) =>
+    this.page.getByRole('row').filter({ hasText: userName }).first();
+  editUserInfoButton = (userName: string) =>
+    this.userRow(userName).getByRole('button', { name: 'View/Edit User Info' });
   disabledStatusRadioEdit = () =>
     this.page.locator('//div[@id="UserGeneralInfo"]//input[@value="DISABLED"]');
   saveAlBtn = () => this.page.locator("//input[@value='Save All']")
@@ -47,90 +51,83 @@ export class UserAdminPage {
 
   async navigateToUserAdministration() {
     await this.systemAdminMenu().click();
-    await this.userAdminLink().waitFor({ state: 'visible', timeout: 10000 });
+    await waitForElement(this.page, this.userAdminLink());
     await this.userAdminLink().click();
     await waitForPageLoad(this.page);
     await this.verifyUserAdministrationPageLoaded();
   }
 
   async verifyUserAdministrationPageLoaded() {
-    await this.userAdministrationHeading().waitFor({ state: 'visible', timeout: 10000});
+    await waitForElement(this.page, this.userAdministrationHeading());
     await expect(this.userAdministrationHeading()).toBeVisible();
   }
 
   async clickNewUser() {
-    await this.newUserButton().waitFor({ state: 'visible', timeout: 10000 });
+    await waitForElement(this.page, this.newUserButton());
     await this.newUserButton().click();
-    // await this.generalInformationHeading().waitFor({state: 'visible',timeout: 10000});
+     await waitForElement(this.page, this.saveButton());
     await expect(this.saveButton()).toBeVisible();
   }
 
   async fillMandatoryUserDetails(userData: UserAdminData) {
+    await waitForElement(this.page, this.firstNameInput());
     await this.firstNameInput().fill(userData.firstName);
     await this.lastNameInput().fill(userData.lastName);
     await this.emailInput().fill(userData.email);
     await this.passwordInput().fill(userData.password);
     await this.userNameInput().evaluate((element) => element.removeAttribute('readonly'));
     await this.userNameInput().fill(userData.userName);
-    await this.page.waitForTimeout(5000);
+    // await this.page.waitForTimeout(3000);
   }
 
   async setUserStatusDisabled() {
     await this.disabledStatusRadio().click();
     await expect(this.disabledStatusRadio()).toBeChecked();
-    await this.page.waitForTimeout(5000);
+    // await this.page.waitForTimeout(3000);
   }
 
   async clickSave() {
-    await this.saveButton().waitFor({ state: 'visible', timeout: 10000 });
+    await waitForElement(this.page, this.saveButton());
     await this.saveButton().click();
-     await this.page.waitForTimeout(5000);
+    //  await this.page.waitForTimeout(3000);
   }
 
   async verifyUserCreatedSuccessfully() {
-    await this.successToastMessage().waitFor({state: 'visible',timeout: 10000});
+    await waitForElement(this.page, this.successToastMessage());
     await expect(this.successToastMessage()).toHaveText('User has been created.');
   }
 
   async searchWithCreatedUserName(userName: string) {
-    await this.userSearchInput().waitFor({ state: 'visible', timeout: 10000 });
+    await waitForElement(this.page, this.userSearchInput());
     await this.userSearchInput().fill(userName);
     await this.userSearchInput().press('Enter');
-    await this.page
-      .getByRole('row')
-      .filter({ hasText: userName })
-      .first()
-      .waitFor({ state: 'visible', timeout: 10000 });
-       await this.page.waitForTimeout(5000);
+    await waitForElement(this.page, this.userRow(userName));
+    // await this.page.waitForTimeout(2000);
   }
 
   async clickEditIconUnderActionsColumn(userName: string) {
-    const userRow = this.page
-      .getByRole('row')
-      .filter({ hasText: userName })
-      .first();
-
-    await userRow.waitFor({ state: 'visible', timeout: 10000 });
-    await userRow.getByRole('button', { name: 'View/Edit User Info' }).click();
-     await this.page.waitForTimeout(5000);
+    const userRow = this.userRow(userName);
+    await waitForElement(this.page, userRow);
+    await this.editUserInfoButton(userName).click();
+    //  await this.page.waitForTimeout(2000);
   }
 
   async clickUserdmin() {
-    await this.userAdminPage().waitFor({ state: 'visible', timeout: 10000 });
+    await waitForElement(this.page, this.userAdminPage());
     await this.userAdminPage().click();
-     await this.page.waitForTimeout(5000);
+    //  await this.page.waitForTimeout(2000);
   }
 
   async setUserStatusDisabledOnEditPage() {
     await this.disabledStatusRadioEdit().click();
     await expect(this.disabledStatusRadioEdit()).toBeChecked();
-    await this.page.waitForTimeout(5000);
+    // await this.page.waitForTimeout(2000);
   }
 
   async clickSaveAllButon() {
-    await this.saveAlBtn().waitFor({ state: 'visible', timeout: 10000 });
+    await waitForElement(this.page, this.saveAlBtn());
     await this.saveAlBtn().click();
-     await this.page.waitForTimeout(5000);
+    //  await this.page.waitForTimeout(2000);
   }
 
   async NavigatesToLogin() {

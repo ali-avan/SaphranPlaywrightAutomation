@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+import { env, waitForElement, waitForPageLoad } from '../utils/helper';
 
 export class HomePage {
   constructor(private page: Page) {}
@@ -9,7 +10,7 @@ export class HomePage {
 
   // Function to verify homepage loaded
   async verifyHomePageLoaded() {
-    await this.homePageHeading().waitFor({ state: 'visible', timeout: 10000 });
+    await waitForElement(this.page, this.homePageHeading());
     await expect(this.homePageHeading()).toBeVisible();
   }
 }
