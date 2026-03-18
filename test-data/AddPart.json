@@ -11,5 +11,32 @@
   "customerPartNumber": "MZD-BC-44521",
   "drawingNumber": "DRW-784512",
   "drawingVersion": "V1.2",
-  "internalQuoteId": "QT-2026-001"
+  "internalQuoteId": "QT-2026-001",
+  
+  "volumesAssignment": {
+    "assignBy": "Vehicle",
+    "viewBy": "Nameplate",
+    "searchText": "ford",
+    "salesParent": "Ford : Ford F-150",
+    "programSelection": {
+      "programPlatform": "Ford P736 [T4]",
+      "plantName": "Dearborn Truck",
+      "partsPer": "1",
+      "NamePlate":"Ford F-150"
+    }
+  },
+  "ourAttributes": {
+    "sellingDivision": "Fremont, IN",
+    "internalPlant": "Default Mod"
+  },
+  "unitPriceContractDetails": {
+    "copyPrice": "10"
+  },
+  "classificationInformation": {
+    "techClassTier1": "Plastic Forming",
+    "productClassTier1": "Seating"
+  },
+  "homePageInProcessSection": {
+    "quoteStatus": "Active"
+  }
 }

@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { Page } from 'playwright';
+import { Locator, Page } from 'playwright';
 dotenv.config();
 
 export const env = {
@@ -9,8 +9,13 @@ export const env = {
   headless: process.env.HEADLESS === "true"
 };
 
-export async function waitForElement(page: Page, selector: string) {
-  await page.waitForSelector(selector, { state: 'visible', timeout: 5000 });
+export async function waitForElement(page: Page, selectorOrLocator: string | Locator) {
+  if (typeof selectorOrLocator === 'string') {
+    await page.waitForSelector(selectorOrLocator, { state: 'visible', timeout: 5000 });
+    return;
+  }
+
+  await selectorOrLocator.waitFor({ state: 'visible', timeout: 5000 });
 }
 
 export async function waitForPageLoad(page: Page) {
