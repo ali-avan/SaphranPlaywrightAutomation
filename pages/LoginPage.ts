@@ -29,5 +29,6 @@ export class LoginPage {
   async verifyDisabledUserCannotLogin() {
     await waitForElement(this.page, this.disabledUserMessage());
     await expect(this.disabledUserMessage()).toBeVisible();
+     await this.page.waitForTimeout(5000);
   }
 }

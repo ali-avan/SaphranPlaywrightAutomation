@@ -38,6 +38,11 @@ When(
   }
 );
 
+When('User redirects to homepage by clicking on Saphran logo', async function () {
+  homePage = new HomePage(this.page);
+  await homePage.redirectToHomePageByClickingSaphranLogo();
+});
+
 Then(
   'In-Process and Recently Completed Parts section should show the saved Opportunity ID part as Active',
   async function () {

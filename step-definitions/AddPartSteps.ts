@@ -17,18 +17,17 @@ function getAddPartPage(page: any): AddPartPage {
 }
 
 const addPartTestData = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../test-data/AddPart.json'),
-    'utf-8'
-  )
-) as AddPartData & {
+  fs.readFileSync(path.join(__dirname, '../test-data/AddPart.json'), 'utf-8')
+) as {
+  generalInformation: AddPartData;
+  generalInformation_a?: AddPartData;
   volumesAssignment: AddPartVolumeData;
   ourAttributes: AddPartOurAttributesData;
   unitPriceContractDetails: AddPartUnitPriceContractDetailsData;
   classificationInformation: AddPartClassificationInformationData;
 };
 
-const addPartData = addPartTestData as AddPartData;
+let currentAddPartData = addPartTestData.generalInformation;
 const addPartVolumeData = addPartTestData.volumesAssignment;
 const addPartOurAttributesData =
   addPartTestData.ourAttributes as AddPartOurAttributesData;
@@ -42,9 +41,21 @@ When('User navigates to the Add Part page', async function () {
   await addPartPage.navigateToAddPartPage();
 });
 
-When('User fills the General Information section for Add Part', async function () {
+
+When('User fills the General Information section for Add Part using {string}', async function (generalInformationSection: string) {
   addPartPage = getAddPartPage(this.page);
-  await addPartPage.fillGeneralInformation(addPartData);
+  const selectedGeneralInformation = (
+    addPartTestData as Record<string, unknown>
+  )[generalInformationSection];
+
+  if (!selectedGeneralInformation) {
+    throw new Error(
+      `General Information section "${generalInformationSection}" was not found in test-data/AddPart.json`
+    );
+  }
+
+  currentAddPartData = selectedGeneralInformation as AddPartData;
+  await addPartPage.fillGeneralInformation(currentAddPartData);
 });
 
 When('User clicks the General Information Save button', async function () {
@@ -106,7 +117,12 @@ When('User clicks the Update FC button', async function () {
 
 Then('Add Part General Information should contain the entered values', async function () {
   addPartPage = getAddPartPage(this.page);
-  await addPartPage.verifyGeneralInformation(addPartData);
+  await addPartPage.verifyGeneralInformation(currentAddPartData);
+});
+
+Then('Verify user able to land successfully on Add part page from home page', async function () {
+  addPartPage = getAddPartPage(this.page);
+  await addPartPage.verifyUserLandsOnAddPartPageSuccessfully();
 });
 
 Then('Add Part Program Assignments should contain the entered values', async function () {

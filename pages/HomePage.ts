@@ -12,6 +12,8 @@ export class HomePage {
   // Locator
   homePageHeading = () =>
     this.page.getByRole('heading', { name: 'Home Page' });
+  saphranLogo = () =>
+    this.page.getByRole('img', { name: 'Saphran' });
   inProcessAndRecentlyCompletedPartsHeading = () =>
     this.page.getByRole('heading', {
       name: /In-Process and Recently Completed Parts/i
@@ -25,6 +27,12 @@ export class HomePage {
   async verifyHomePageLoaded() {
     await waitForElement(this.page, this.homePageHeading());
     await expect(this.homePageHeading()).toBeVisible();
+  }
+
+  async redirectToHomePageByClickingSaphranLogo() {
+    await this.saphranLogo().click();
+    await waitForPageLoad(this.page);
+    await this.verifyHomePageLoaded();
   }
 
   async searchSavedOpportunityIdInInProcessSection() {

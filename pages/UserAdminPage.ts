@@ -67,6 +67,7 @@ export class UserAdminPage {
     await this.newUserButton().click();
      await waitForElement(this.page, this.saveButton());
     await expect(this.saveButton()).toBeVisible();
+     await this.page.waitForTimeout(2000);
   }
 
   async fillMandatoryUserDetails(userData: UserAdminData) {
@@ -77,19 +78,19 @@ export class UserAdminPage {
     await this.passwordInput().fill(userData.password);
     await this.userNameInput().evaluate((element) => element.removeAttribute('readonly'));
     await this.userNameInput().fill(userData.userName);
-    // await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(2000);
   }
 
   async setUserStatusDisabled() {
     await this.disabledStatusRadio().click();
     await expect(this.disabledStatusRadio()).toBeChecked();
-    // await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(2000);
   }
 
   async clickSave() {
     await waitForElement(this.page, this.saveButton());
     await this.saveButton().click();
-    //  await this.page.waitForTimeout(3000);
+     await this.page.waitForTimeout(3000);
   }
 
   async verifyUserCreatedSuccessfully() {
@@ -102,36 +103,37 @@ export class UserAdminPage {
     await this.userSearchInput().fill(userName);
     await this.userSearchInput().press('Enter');
     await waitForElement(this.page, this.userRow(userName));
-    // await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
   }
 
   async clickEditIconUnderActionsColumn(userName: string) {
     const userRow = this.userRow(userName);
     await waitForElement(this.page, userRow);
     await this.editUserInfoButton(userName).click();
-    //  await this.page.waitForTimeout(2000);
+     await this.page.waitForTimeout(2000);
   }
 
   async clickUserdmin() {
     await waitForElement(this.page, this.userAdminPage());
     await this.userAdminPage().click();
-    //  await this.page.waitForTimeout(2000);
+     await this.page.waitForTimeout(2000);
   }
 
   async setUserStatusDisabledOnEditPage() {
     await this.disabledStatusRadioEdit().click();
     await expect(this.disabledStatusRadioEdit()).toBeChecked();
-    // await this.page.waitForTimeout(2000);
+    await this.page.waitForTimeout(2000);
   }
 
   async clickSaveAllButon() {
     await waitForElement(this.page, this.saveAlBtn());
     await this.saveAlBtn().click();
-    //  await this.page.waitForTimeout(2000);
+     await this.page.waitForTimeout(2000);
   }
 
   async NavigatesToLogin() {
     const loginPage = new LoginPage(this.page);
     await loginPage.LaunchUrl();
+     await this.page.waitForTimeout(2000);
   }
 }

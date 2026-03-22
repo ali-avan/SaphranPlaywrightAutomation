@@ -91,6 +91,8 @@ export class AddPartPage {
     this.page.getByRole('textbox', { name: 'Internal Quote ID' });
   generalInformationSaveButton = () =>
     this.page.locator('[name="ctl00$SaphranPage$ctl202"]');
+  generalInformationSectionTitle = () =>
+    this.page.locator('#ctl00_SaphranPage_pnlSec2_Title');
   editVolumesButton = () =>
     this.page.getByRole('button', { name: 'Edit Volumes' });
   assignBySelect = () => this.page.getByLabel('Assign By:');
@@ -191,6 +193,10 @@ export class AddPartPage {
     await this.generalInformationSaveButton().click();
     await waitForPageLoad(this.page);
     await this.page.waitForTimeout(2000);
+  }
+
+  async verifyUserLandsOnAddPartPageSuccessfully() {
+    await expect(this.generalInformationSectionTitle()).toBeVisible();
   }
 
   async clickEditVolumesButton() {

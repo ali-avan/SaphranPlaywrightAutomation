@@ -2,7 +2,7 @@
 Feature: User Administration
 
   @DisabledUser @smoke
-  Scenario: Verify user can open New User form and fill mandatory details
+  Scenario: Verify that disabled user is not able to login by creating a new user with disabled status
     Given User is to be redirected to the homepage screen
     And User navigates to the User Administration page
     When User clicks on the New User button
