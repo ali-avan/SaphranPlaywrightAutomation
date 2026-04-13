@@ -1,0 +1,57 @@
+{
+  "cookies": [
+    {
+      "name": "ASP.NET_SessionId",
+      "value": "oo1epp5ngwa1czdt1jael00a",
+      "domain": "secureapps0.saphran.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ASPSESSIONFIXATION",
+      "value": "FJFRGOPTVXEFVNTZIIHI",
+      "domain": "secureapps0.saphran.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": ".ASPXAUTH",
+      "value": "906C96103E5DDB29925DF5BEEF414F78E35B43657AF16D9650E9AF9B6D75BA49140DA6E1ABDE5B2432D5869A24527D34BFDA360393F0014AF7677726A943523DDBB0C47765CC7A87119BC7C2D73A44405E7687EC462CC323355A13CD097584F3C44796D843B8E7AF780EC29AF6D424046B0B900C2EA2AEE44E6D087DF2F6FD25E325B95AB90F3C994E28CAD60E1B0C13",
+      "domain": "secureapps0.saphran.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://secureapps0.saphran.com",
+      "localStorage": [
+        {
+          "name": "data-bs-theme",
+          "value": "light"
+        },
+        {
+          "name": "DataTables_Events_/ItwMetalsNewRegressionTest/MVC/Home",
+          "value": "{\"time\":1775843073748,\"start\":0,\"length\":20,\"order\":[],\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true},\"columns\":[{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}}]}"
+        },
+        {
+          "name": "DataTables_SystemMessages_/ItwMetalsNewRegressionTest/MVC/Home",
+          "value": "{\"time\":1775843073733,\"start\":0,\"length\":20,\"order\":[],\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true},\"columns\":[{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}}]}"
+        },
+        {
+          "name": "DataTables_DropPrograms_/ItwMetalsNewRegressionTest/MVC/Home",
+          "value": "{\"time\":1775843073815,\"start\":0,\"length\":20,\"order\":[],\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true},\"columns\":[{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}},{\"visible\":true,\"search\":{\"search\":\"\",\"smart\":true,\"regex\":false,\"caseInsensitive\":true}}]}"
+        }
+      ]
+    }
+  ]
+}

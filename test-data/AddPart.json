@@ -54,6 +54,11 @@
     "techClassTier1": "Plastic Forming",
     "productClassTier1": "Seating"
   },
+  "partSearch": {
+    "customerName": "FORD",
+    "expectedResultSection": "Results",
+    "expectedResultText": "FORD"
+  },
   "homePageInProcessSection": {
     "quoteStatus": "Active"
   }

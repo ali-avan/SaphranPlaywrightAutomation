@@ -1,8 +1,9 @@
 import { BrowserContext, Page } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
+import { env } from './helper';
 
-const STORAGE_FILE = path.join(__dirname, '../storage/session.json');
+const STORAGE_FILE = path.join(__dirname, `../storage/session-${env.targetEnv}.json`);
 
 export async function saveAuthSession(page: Page) {
   const storage = await page.context().storageState();

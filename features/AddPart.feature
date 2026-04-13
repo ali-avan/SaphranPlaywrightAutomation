@@ -1,7 +1,7 @@
 @Regression
 Feature: Add Part
 
-  @AddPart @smoke
+  @AddPart @regression @test
   Scenario: Verify user can Add Part with a new program assignment and Update the Forecast with the new part successfully
     Given User is to be redirected to the homepage screen
     When User navigates to the Add Part page
@@ -26,7 +26,7 @@ Feature: Add Part
     And Add Part Classification Information should contain the entered values
  
 
-  @AddPartHomePage @smoke
+  @AddPartHomePage @regression @test
   Scenario: Verify user able to land successfully on Add part page from home page
     Given User is to be redirected to the homepage screen
     When User navigates to the Add Part page
@@ -37,3 +37,11 @@ Feature: Add Part
     And User searches the saved Opportunity ID in In-Process and Recently Completed Parts section
     And User opens the part page from the saved Opportunity ID search result
     Then Verify user able to land successfully on Add part page from home page
+
+  @AccountManagement @smoke @test
+  Scenario: Verify user able to land successfully on Account Management page from Part Management menu
+    Given User is to be redirected to the homepage screen
+    When User navigates to the Account Management page
+    Then Verify user able to land successfully on Account Management page
+     When User navigates to the Create Vehicle Set page
+    Then Verify user able to land successfully on Create Vehicle Set page

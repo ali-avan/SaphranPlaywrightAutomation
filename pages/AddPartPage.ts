@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { waitForPageLoad } from '../utils/helper';
+import { assertNoBrowserErrors, waitForElement, waitForPageLoad } from '../utils/helper';
 
 export type AddPartData = {
   projectNameNumber: string;
@@ -63,7 +63,15 @@ export class AddPartPage {
   constructor(private page: Page) {}
 
   partManagementMenu = () => this.page.getByText('Part Management');
+  accountManagementLink = () =>
+    this.page.getByRole('link', { name: 'Account Management' });
+  createVehicleSetLink = () =>
+    this.page.getByRole('link', { name: 'Create Vehicle Set' });
   addPartLink = () => this.page.getByRole('link', { name: 'Add Part' });
+  accountManagementHeading = () =>
+    this.page.getByRole('heading', { name: 'Account Management' });
+  createVehicleSetHeading = () =>
+    this.page.getByRole('heading', { name: 'Vehicle Set' });
   projectNameNumberInput = () =>
     this.page.locator('#ctl00_SaphranPage_project_nm_project_nm_TextBox');
   partNameInput = () =>  this.page.locator('#ctl00_SaphranPage_part_nm');
@@ -154,8 +162,22 @@ export class AddPartPage {
     await this.partManagementMenu().click();
     await this.addPartLink().waitFor({ state: 'visible', timeout: 10000 });
     await this.addPartLink().click();
-     await waitForPageLoad(this.page);
+    await waitForPageLoad(this.page);
     await expect(this.partNameInput()).toBeVisible();
+  }
+
+  async navigateToAccountManagementPage() {
+    await this.partManagementMenu().click();
+    await waitForElement(this.page, this.accountManagementLink());
+    await this.accountManagementLink().click();
+    await waitForPageLoad(this.page);
+  }
+
+  async navigateToCreateVehicleSetPage() {
+    await this.partManagementMenu().click();
+    await waitForElement(this.page, this.createVehicleSetLink());
+    await this.createVehicleSetLink().click();
+    await waitForPageLoad(this.page);
   }
 
   async selectAutocomplete(input: Locator, value: string) {
@@ -197,6 +219,26 @@ export class AddPartPage {
 
   async verifyUserLandsOnAddPartPageSuccessfully() {
     await expect(this.generalInformationSectionTitle()).toBeVisible();
+  }
+
+  async verifyAccountManagementPageLoaded() {
+    await waitForElement(this.page, this.accountManagementHeading());
+    await expect(this.page).toHaveTitle(/Account Management/i);
+    await expect(this.accountManagementHeading()).toBeVisible();
+    await expect(this.page.locator('body')).not.toContainText(
+      /Server Error|Application Error|Runtime Error|Exception Details|HTTP Error/i
+    );
+    await assertNoBrowserErrors(this.page);
+  }
+
+  async verifyCreateVehicleSetPageLoaded() {
+    await waitForElement(this.page, this.createVehicleSetHeading());
+    await expect(this.page).toHaveURL(/VehicleSet\/Index/i);
+    await expect(this.createVehicleSetHeading()).toBeVisible();
+    await expect(this.page.locator('body')).not.toContainText(
+      /Server Error|Application Error|Runtime Error|Exception Details|HTTP Error/i
+    );
+    await assertNoBrowserErrors(this.page);
   }
 
   async clickEditVolumesButton() {

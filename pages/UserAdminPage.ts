@@ -36,6 +36,9 @@ export class UserAdminPage {
   successToastMessage = () => this.page.locator('div.toastr-message');
   userSearchInput = () => this.page.getByRole('textbox', { name: 'Search' });
   userAdminPage = () =>  this.page.getByRole('link', { name: /User Administration/i })
+  firstUserRow = () => this.page.locator('table tbody tr').first();
+  firstRowEditUserInfoButton = () =>
+    this.firstUserRow().getByRole('button', { name: 'View/Edit User Info' });
   userRow = (userName: string) =>
     this.page.getByRole('row').filter({ hasText: userName }).first();
   editUserInfoButton = (userName: string) =>
@@ -43,6 +46,12 @@ export class UserAdminPage {
   disabledStatusRadioEdit = () =>
     this.page.locator('//div[@id="UserGeneralInfo"]//input[@value="DISABLED"]');
   saveAlBtn = () => this.page.locator("//input[@value='Save All']")
+
+  private async verifyNoVisibleApplicationErrors() {
+    await expect(this.page.locator('body')).not.toContainText(
+      /Server Error|Application Error|Runtime Error|Exception Details|HTTP Error/i
+    );
+  }
 
   async openHomePage() {
     await this.page.goto(`${env.baseUrl!}/MVC/Home`);
@@ -59,7 +68,9 @@ export class UserAdminPage {
 
   async verifyUserAdministrationPageLoaded() {
     await waitForElement(this.page, this.userAdministrationHeading());
+    await expect(this.page).toHaveURL(/UserAdministration|UserAdmin/i);
     await expect(this.userAdministrationHeading()).toBeVisible();
+    await this.verifyNoVisibleApplicationErrors();
   }
 
   async clickNewUser() {
@@ -113,6 +124,13 @@ export class UserAdminPage {
      await this.page.waitForTimeout(2000);
   }
 
+  async clickEditIconForFirstRow() {
+    await waitForElement(this.page, this.firstUserRow());
+    await waitForElement(this.page, this.firstRowEditUserInfoButton());
+    await this.firstRowEditUserInfoButton().click();
+    await waitForPageLoad(this.page);
+  }
+
   async clickUserdmin() {
     await waitForElement(this.page, this.userAdminPage());
     await this.userAdminPage().click();
@@ -123,6 +141,15 @@ export class UserAdminPage {
     await this.disabledStatusRadioEdit().click();
     await expect(this.disabledStatusRadioEdit()).toBeChecked();
     await this.page.waitForTimeout(2000);
+  }
+
+  async verifyUserDetailPageLoaded() {
+    await waitForElement(this.page, this.generalInformationHeading());
+    await waitForElement(this.page, this.saveAlBtn());
+    await expect(this.page).toHaveURL(/UserGeneralInfo|UserAdministration|UserAdmin/i);
+    await expect(this.generalInformationHeading()).toBeVisible();
+    await expect(this.saveAlBtn()).toBeVisible();
+    await this.verifyNoVisibleApplicationErrors();
   }
 
   async clickSaveAllButon() {

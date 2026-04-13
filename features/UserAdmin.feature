@@ -1,7 +1,7 @@
 @Regression
 Feature: User Administration
 
-  @DisabledUser @smoke
+  @DisabledUser @regression @test
   Scenario: Verify that disabled user is not able to login by creating a new user with disabled status
     Given User is to be redirected to the homepage screen
     And User navigates to the User Administration page
@@ -18,3 +18,11 @@ Feature: User Administration
     And User navigates to the Login page
     Then Login with the disabled user
     And Verify user should not be able to login
+
+  @UserAdminSmoke @smoke @test
+  Scenario: Verify user can open User Administration and first user detail page successfully
+    Given User is to be redirected to the homepage screen
+    And User navigates to the User Administration page
+    Then User Administration page should load successfully without UI error
+    When User clicks on the edit icon under actions column for the first row
+    Then User detail page should load successfully without UI error

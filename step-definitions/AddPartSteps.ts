@@ -41,6 +41,16 @@ When('User navigates to the Add Part page', async function () {
   await addPartPage.navigateToAddPartPage();
 });
 
+When('User navigates to the Account Management page', async function () {
+  addPartPage = new AddPartPage(this.page);
+  await addPartPage.navigateToAccountManagementPage();
+});
+
+When('User navigates to the Create Vehicle Set page', async function () {
+  addPartPage = new AddPartPage(this.page);
+  await addPartPage.navigateToCreateVehicleSetPage();
+});
+
 
 When('User fills the General Information section for Add Part using {string}', async function (generalInformationSection: string) {
   addPartPage = getAddPartPage(this.page);
@@ -123,6 +133,16 @@ Then('Add Part General Information should contain the entered values', async fun
 Then('Verify user able to land successfully on Add part page from home page', async function () {
   addPartPage = getAddPartPage(this.page);
   await addPartPage.verifyUserLandsOnAddPartPageSuccessfully();
+});
+
+Then('Verify user able to land successfully on Account Management page', async function () {
+  addPartPage = getAddPartPage(this.page);
+  await addPartPage.verifyAccountManagementPageLoaded();
+});
+
+Then('Verify user able to land successfully on Create Vehicle Set page', async function () {
+  addPartPage = getAddPartPage(this.page);
+  await addPartPage.verifyCreateVehicleSetPageLoaded();
 });
 
 Then('Add Part Program Assignments should contain the entered values', async function () {

@@ -3,6 +3,40 @@ const path = require('path');
 const fs = require('fs');
 
 const reportFile = path.join(__dirname, 'cucumber-report.html');
+const resultsFile = path.join(__dirname, 'results', 'results.json');
+
+function stripAnsi(value) {
+    return value.replace(/\u001b\[[0-9;]*m/g, '');
+}
+
+function sanitizeReportData(value) {
+    if (typeof value === 'string') {
+        return stripAnsi(value);
+    }
+
+    if (Array.isArray(value)) {
+        return value.map(sanitizeReportData);
+    }
+
+    if (value && typeof value === 'object') {
+        return Object.fromEntries(
+            Object.entries(value).map(([key, childValue]) => [key, sanitizeReportData(childValue)])
+        );
+    }
+
+    return value;
+}
+
+function sanitizeResultsFile() {
+    if (!fs.existsSync(resultsFile)) {
+        return;
+    }
+
+    const rawResults = fs.readFileSync(resultsFile, 'utf-8');
+    const parsedResults = JSON.parse(rawResults);
+    const sanitizedResults = sanitizeReportData(parsedResults);
+    fs.writeFileSync(resultsFile, JSON.stringify(sanitizedResults, null, 2));
+}
 
 const options = {
     theme: 'bootstrap',
@@ -19,6 +53,7 @@ const options = {
 };
 
 // Generate the report
+sanitizeResultsFile();
 reporter.generate(options);
 
 // Open the report

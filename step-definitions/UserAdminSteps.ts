@@ -64,3 +64,15 @@ Then('User navigates to the Login page', async function () {
   loginPage = new LoginPage(this.page);
   await userAdminPage.NavigatesToLogin();
 });
+
+Then('User Administration page should load successfully without UI error', async function () {
+  await userAdminPage.verifyUserAdministrationPageLoaded();
+});
+
+When('User clicks on the edit icon under actions column for the first row', async function () {
+  await userAdminPage.clickEditIconForFirstRow();
+});
+
+Then('User detail page should load successfully without UI error', async function () {
+  await userAdminPage.verifyUserDetailPageLoaded();
+});

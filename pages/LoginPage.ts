@@ -10,8 +10,12 @@ export class LoginPage {
   disabledUserMessage = () =>this.page.getByText('This Login name is not active, Please contact your System Administrator*',{ exact: true });
 
   async LaunchUrl() {
-    await this.page.goto(env.baseUrl!);
+    await this.page.goto(env.baseUrl!, {
+      waitUntil: 'domcontentloaded',
+      timeout: 60_000
+    });
     await waitForPageLoad(this.page);
+    await waitForElement(this.page, this.userNameInput());
   }
 
   async login(userName: string, password: string) {
